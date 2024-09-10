@@ -1,0 +1,13 @@
+.App {
+  display: flex;
+  justify-content: center;
+  align-self: flex-start;
+  flex-wrap: wrap;
+}
+
+h1,
+span {
+  color: white;
+  text-align: center;
+  width: 100%;
+}

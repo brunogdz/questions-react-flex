@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zeno's Paradox of Achilles and the Tortoise</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            margin: 20px auto;
+            max-width: 600px;
+        }
+
+        .svg {
+            width: 100%;
+            height: 100px;
+        }
+
+        #tortoise, #achilles {
+            transition: cx 1s linear;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #d9534f;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+
+        button:hover {
+            background-color: #c9302c;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Zeno's Paradox of Achilles and the Tortoise</h2>
+        <button id="startButton">Start!</button>
+        <p>Tortoise progress: <span id="tortoiseProgress">0</span>%</p>
+        <svg class="svg">
+            <circle id="tortoise" cx="50" cy="55" r="20" fill="green"></circle>
+        </svg>
+        <p>Achilles progress: <span id="achillesProgress">0</span>%</p>
+        <svg class="svg">
+            <circle id="achilles" cx="0" cy="45" r="30" fill="blue"></circle>
+        </svg>
+    </div>
+
+    <script>
+        const startButton = document.getElementById('startButton');
+        const tortoise = document.getElementById('tortoise');
+        const achilles = document.getElementById('achilles');
+        const tortoiseProgress = document.getElementById('tortoiseProgress');
+        const achillesProgress = document.getElementById('achillesProgress');
+
+        let tortoisePosition = 0;
+        let achillesPosition = 0;
+        let duration = 1000; 
+
+
+        function updatePositions() {
+            tortoisePosition += 25; 
+            achillesPosition += 50; 
+
+            tortoise.setAttribute('cx', `${50 + tortoisePosition}%`);
+            achilles.setAttribute('cx', `${achillesPosition}%`);
+
+            tortoiseProgress.innerText = Math.min(100, Math.round(tortoisePosition / 25) * 25);
+            achillesProgress.innerText = Math.min(100, Math.round(achillesPosition / 50) * 50);
+
+            
+            if (achillesPosition < 100) {
+                setTimeout(updatePositions, duration);
+            }
+        }
+
+
+        startButton.addEventListener('click', () => {
+            tortoisePosition = 0;
+            achillesPosition = 0;
+            updatePositions();
+        });
+    </script>
+</body>
+</html>
