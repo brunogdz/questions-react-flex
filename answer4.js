@@ -8,8 +8,13 @@ function isValidBrackets(s) {
 
     for (let char of s) {
         if (map[char]) {
+
             stack.push(map[char]);
+
         } else {
+            if ((/[a-zA-Z]/).test(char)) {
+                continue;
+            }
             if (stack.pop() !== char) {
                 return false;
             }
@@ -20,9 +25,9 @@ function isValidBrackets(s) {
 }
 
 
-console.log(isValidBrackets("{[]}"));
+// console.log(isValidBrackets("{[]}"));
+// console.log(isValidBrackets("{(])}"));
+// console.log(isValidBrackets("{([)]}")); 
+// console.log(isValidBrackets("{([)]}")); 
 console.log(isValidBrackets("{(])}"));
-console.log(isValidBrackets("{([)]}")); 
-console.log(isValidBrackets("{([)]}")); 
-console.log(isValidBrackets("{(])}")); 
-console.log(isValidBrackets("{([])}")); 
+console.log(isValidBrackets("()({[a]})")); 
